@@ -7,37 +7,71 @@
 </head>
 <body>
 
-  <h1>Private Access</h1>
+  <div class="login-container">
+    <h1 id="question">Enter your username</h1>
 
-  <input id="username" placeholder="username">
-  <input id="password" placeholder="answer">
+    <input id="username" placeholder="Username">
+    <input id="password" placeholder="Answer" type="password">
 
-  <button id="loginBtn">Enter</button>
+    <label class="toggle">
+      <input type="checkbox" id="togglePassword"> Show password
+    </label>
 
-  <p id="error"></p>
+    <button id="loginBtn">Enter</button>
+    <p id="error" class="error"></p>
+  </div>
 
   <script>
     const users = {
-      "vay": "me",
-      "amy": "redpanda",
-      "jack": "can i take multple pictures of the fan"
+      "vay": {
+        password: "me",
+        question: "What do I tell people to call me?"
+      },
+      "jack": {
+        password: "can i take multiple pictures of the fan",
+        question: "What is the iconic line you said when you sleepwalked the first time?"
+      },
+      "amy": {
+        password: "bred panda",
+        question: "What do you look like?"
+      }
     };
 
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const error = document.getElementById("error");
+    const toggle = document.getElementById("togglePassword");
+    const question = document.getElementById("question");
 
-      if (users[u] === p) {
+    // Update question dynamically
+    usernameInput.addEventListener("input", () => {
+      const userKey = usernameInput.value.trim().toLowerCase();
+      if(users[userKey]){
+        question.innerText = users[userKey].question;
+      } else {
+        question.innerText = "Enter your username";
+      }
+    });
+
+    // Toggle password visibility
+    toggle.addEventListener("change", () => {
+      passwordInput.type = toggle.checked ? "text" : "password";
+    });
+
+    loginBtn.addEventListener("click", () => {
+      const username = usernameInput.value.trim().toLowerCase();
+      const password = passwordInput.value.trim().toLowerCase();
+
+      if(users[username] && password === users[username].password.toLowerCase()){
         localStorage.setItem("loggedIn", "yes");
-        localStorage.setItem("user", u);
+        localStorage.setItem("user", username);
         window.location.href = "videos.html";
       } else {
-        document.getElementById("error").innerText =
-          "Wrong username or answer";
+        error.innerText = "Wrong username or answer";
       }
     });
   </script>
 
 </body>
 </html>
-
