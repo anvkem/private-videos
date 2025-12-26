@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Private Access - Vay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>What do I call you?</h1>
+
+  <input id="username" placeholder="Enter your username">
+  <input id="password" placeholder="Answer to your question" type="password">
+
+  <label>
+    <input type="checkbox" id="togglePassword"> Show password
+  </label>
+
+  <button id="loginBtn">Enter</button>
+
+  <p id="error"></p>
+
+  <script>
+    // Define the friend’s login info
+    const correctUsername = "vay";
+    const correctPassword = "my inside joke answer";
+
+    const loginBtn = document.getElementById("loginBtn");
+    const toggle = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+
+    // Toggle password visibility
+    toggle.addEventListener("change", () => {
+      passwordInput.type = toggle.checked ? "text" : "password";
+    });
+
+    loginBtn.addEventListener("click", () => {
+      const username = document.getElementById("username").value.trim().toLowerCase();
+      const password = passwordInput.value.trim().toLowerCase();
+
+      if (username === correctUsername.toLowerCase() && password === correctPassword.toLowerCase()) {
+        localStorage.setItem("loggedIn", "yes");
+        localStorage.setItem("user", correctUsername.toLowerCase());
+        window.location.href = "videos.html";
+      } else {
+        document.getElementById("error").innerText = "Wrong username or answer";
+      }
+    });
+  </script>
+
+</body>
+</html>
 
