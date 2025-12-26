@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Private Videos</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Your Videos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div id="content">
+  <div id="content" class="videos-container">
     <h1>Private Videos</h1>
   </div>
 
   <script>
-    // 🔐 Login protection
-    if (localStorage.getItem("loggedIn") !== "yes") {
+    if(localStorage.getItem("loggedIn") !== "yes"){
       window.location.href = "index.html";
     }
 
     const user = localStorage.getItem("user");
 
-    // 🎥 Who can see what
     const access = {
       "vay": ["IMG_4968.mp4"],
       "jack": ["IMG_4968.mp4"],
@@ -28,13 +26,13 @@
 
     const container = document.getElementById("content");
 
-    if (!access[user] || access[user].length === 0) {
+    if(!access[user] || access[user].length === 0){
       container.innerHTML += "<p>No videos available.</p>";
     } else {
       access[user].forEach(video => {
         const v = document.createElement("video");
         v.controls = true;
-        v.width = 320;
+        v.width = 480;
         v.style.marginBottom = "20px";
 
         const src = document.createElement("source");
