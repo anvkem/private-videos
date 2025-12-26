@@ -60,15 +60,22 @@
     });
 
     loginBtn.addEventListener("click", () => {
-      const username = usernameInput.value.trim().toLowerCase();
-      const password = passwordInput.value.trim().toLowerCase();
+      // Function to remove ALL spaces and lowercase
+function normalize(str) {
+  return str.replace(/\s+/g, '').toLowerCase();
+}
 
-      if(users[username] && password === users[username].password.toLowerCase()){
-        localStorage.setItem("loggedIn", "yes");
-        localStorage.setItem("user", username);
-        window.location.href = "videos.html";
-      } else {
-        error.innerText = "Wrong username or answer";
+const username = normalize(usernameInput.value);
+const password = normalize(passwordInput.value);
+
+if(users[username] && password === normalize(users[username].password)){
+  localStorage.setItem("loggedIn", "yes");
+  localStorage.setItem("user", username);
+  window.location.href = "videos.html";
+} else {
+  error.innerText = "Wrong username or answer";
+}
+
       }
     });
   </script>
