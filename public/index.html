@@ -5,6 +5,12 @@
   <title>Private Videos</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<script>
+  if (localStorage.getItem("loggedIn") !== "yes") {
+    window.location.href = "login.html";
+  }
+</script>
+
 <body>
 
   <h1>Private Videos</h1>
