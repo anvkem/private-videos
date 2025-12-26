@@ -22,10 +22,11 @@
   </div>
 
   <script>
+    // USERS: username => {password, question}
     const users = {
       "vay": {
         password: "me",
-        question: "who are you"
+        question: "Who are you"
       },
       "jack": {
         password: "can i take multiple pictures of the fan",
@@ -44,9 +45,14 @@
     const toggle = document.getElementById("togglePassword");
     const question = document.getElementById("question");
 
+    // Normalize string: lowercase + remove all spaces
+    function normalize(str) {
+      return str.replace(/\s+/g, '').toLowerCase();
+    }
+
     // Update question dynamically
     usernameInput.addEventListener("input", () => {
-      const userKey = usernameInput.value.trim().toLowerCase();
+      const userKey = normalize(usernameInput.value);
       if(users[userKey]){
         question.innerText = users[userKey].question;
       } else {
@@ -60,22 +66,15 @@
     });
 
     loginBtn.addEventListener("click", () => {
-      // Function to remove ALL spaces and lowercase
-function normalize(str) {
-  return str.replace(/\s+/g, '').toLowerCase();
-}
+      const username = normalize(usernameInput.value);
+      const password = normalize(passwordInput.value);
 
-const username = normalize(usernameInput.value);
-const password = normalize(passwordInput.value);
-
-if(users[username] && password === normalize(users[username].password)){
-  localStorage.setItem("loggedIn", "yes");
-  localStorage.setItem("user", username);
-  window.location.href = "videos.html";
-} else {
-  error.innerText = "Wrong username or answer";
-}
-
+      if(users[username] && password === normalize(users[username].password)){
+        localStorage.setItem("loggedIn", "yes");
+        localStorage.setItem("user", username);
+        window.location.href = "videos.html";
+      } else {
+        error.innerText = "Wrong username or answer";
       }
     });
   </script>
