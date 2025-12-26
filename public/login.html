@@ -1,75 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Private</title>
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      font-family: -apple-system, BlinkMacSystemFont, "San Francisco",
-                   Helvetica, Arial, sans-serif;
-      color: #111;
-    }
-
-    .card {
-      width: 320px;
-      text-align: center;
-    }
-
-    h1 {
-      font-weight: 500;
-      margin-bottom: 24px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: none;
-      background: black;
-      color: white;
-      cursor: pointer;
-    }
-
-    .question {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-  </style>
+  <title>Private Access</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="card">
-    <h1>Private</h1>
+  <h1>Private Access</h1>
 
-    <input placeholder="Username">
-    <div class="question">
-      Your question will appear here
-    </div>
-    <input placeholder="Your answer">
+  <input id="username" placeholder="username">
+  <input id="password" placeholder="answer" type="password">
 
-    <button>Continue</button>
-  </div>
+  <button onclick="login()">Enter</button>
+
+  <p id="error"></p>
+
+  <script>
+    const users = {
+      "vay": "me",
+      "jack": "can i take multiple pictures of the fan",
+      "amy": "red panda"
+    };
+
+    function login() {
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
+
+      if (users[u] === p) {
+        localStorage.setItem("loggedIn", "yes");
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("error").innerText = "Access denied";
+      }
+    }
+  </script>
 
 </body>
 </html>
-
