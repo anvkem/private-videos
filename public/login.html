@@ -12,7 +12,7 @@
   <input id="username" placeholder="username">
   <input id="password" placeholder="answer">
 
-  <button onclick="login()">Enter</button>
+  <button id="loginBtn">Enter</button>
 
   <p id="error"></p>
 
@@ -21,7 +21,7 @@
       "vay": "123"
     };
 
-    function login() {
+    document.getElementById("loginBtn").addEventListener("click", () => {
       const u = document.getElementById("username").value.trim();
       const p = document.getElementById("password").value.trim();
 
@@ -32,3 +32,9 @@
       } else {
         document.getElementById("error").innerText =
           "Wrong username or answer";
+      }
+    });
+  </script>
+
+</body>
+</html>
